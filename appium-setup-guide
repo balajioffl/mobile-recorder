@@ -1,0 +1,216 @@
+﻿Install Node.js
+
+	sudo apt update
+	sudo apt install nodejs npm -y
+	node -v
+	npm -v
+
+
+Install Appium 
+
+	npm install -g appium
+	appium -v
+
+
+Install Android SDK (CLI only)
+
+	mkdir -p ~/Android/Sdk/cmdline-tools
+	cd ~/Android/Sdk/cmdline-tools
+
+	wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+	unzip commandlinetools-linux-*.zip
+	mv cmdline-tools latest
+
+
+Set Environment Variables
+
+	echo 'export ANDROID_HOME=$HOME/Android/Sdk' >> ~/.bashrc
+	echo 'export PATH=$PATH:$ANDROID_HOME/platform-tools' >> ~/.bashrc
+	echo 'export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin' >> ~/.bashrc
+	source ~/.bashrc
+
+	echo $ANDROID_HOME
+	sdkmanager --version
+	sdkmanager --licenses
+
+
+Install Required Packages
+
+	sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2" "emulator"
+	adb version
+	ls ~/Android/Sdk
+
+	nano ~/.bashrc
+
+Add this at the TOP:
+
+	export ANDROID_HOME=$HOME/Android/Sdk
+	export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+
+ctrl + x -> y -> enter
+
+verify
+	which sdkmanager
+	sdkmanager "system-images;android-33;google_apis;x86_64"
+
+
+if java compatibility issue occurs 
+
+Check current Java version
+	java -version
+
+update java version
+	sudo apt update
+	sudo apt install openjdk-17-jdk -y
+
+switch to new version
+	 update-alternatives --config java
+
+Run sdkmanager again
+	sdkmanager "system-images;android-33;google_apis;x86_64"
+
+
+Create Emulator (AVD)
+
+Run:
+	avdmanager create avd -n testDevice -k "system-images;android-33;google_apis;x86_64"
+
+When it asks:
+	Do you wish to create a custom hardware profile? [no]
+	Type:no
+
+Verify AVD Created
+	avdmanager list avd
+	
+Start Emulator
+	emulator -avd testDevice
+	
+Check Device Connected
+
+Open a new terminal:
+	adb devices
+	
+
+Download Working APK
+	wget https://github.com/appium/appium/raw/master/packages/appium/sample-code/apps/ApiDemos-debug.apk
+	
+Install APK
+	adb install ApiDemos-debug.apk
+	
+	
+python script
+	cd ~/appium-test
+	code .
+
+open your python script and run code
+
+install Appium Python Client
+	pip install --upgrade Appium-Python-Client
+	
+Verify Version
+	pip show Appium-Python-Client
+	
+
+
+Appium inspector setup
+
+download this 
+	https://github.com/appium/appium-inspector/releases
+	Appium-Inspector-2026.5.1-linux-x86_64.AppImage
+
+Go to download folder:
+
+	cd ~/Downloads
+	chmod +x Appium-Inspector-linux.AppImage
+	
+Run Inspector
+	
+	./Appium-Inspector-2026.5.1-linux-x86_64.AppImage
+	
+
+# sauce app
+
+Download APK:
+	https://github.com/saucelabs/my-demo-app-android/releases
+	File: Android.SauceLabs.Mobile.Sample.app.2.7.1.apk
+
+	adb shell dumpsys window | grep mCurrentFocus
+
+You will get something like:
+
+	com.swaglabsmobileapp/.MainActivity
+	
+open your app manually
+
+Run this command:
+
+	adb shell monkey -p com.swaglabsmobileapp -c android.intent.category.LAUNCHER 1
+
+
+Adb device:
+
+1. Install ADB
+
+Download platform tools:
+Android Platform Tools (Official)
+
+cd ~
+unzip platform-tools-latest-linux.zip
+mv platform-tools android-tools
+echo 'export PATH=$PATH:~/android-tools' >> ~/.bashrc
+source ~/.bashrc
+
+Check:
+
+adb version
+
+2. Enable Debugging on Phone
+
+On your Android device:
+
+Settings → About Phone → tap Build Number 7 times
+Go to Developer Options
+USB Debugging ON
+
+adb devices
+
+Start Raw Event Capture
+adb shell getevent -lt
+
+Filter Only Coordinates
+adb shell getevent -lt | grep -E 'ABS_MT_POSITION_X|ABS_MT_POSITION_Y'
+
+Capture Key Presses
+adb shell getevent -lt | grep EV_KEY
+
+
+Appium gives (UI-level info)
+it understands the app structure
+It gives:
+    • Element ID (resource_id) 
+    • Text inside element 
+    • Button / input field info 
+    • Class (Button, EditText) 
+    • Content description 
+    • Activity / screen name 
+    • Element bounds (position + size)
+
+ADB gives (Touch-level info)
+It understands finger movement only
+It gives:
+    • Tap coordinates (x, y) 
+    • Swipe start & end 
+    • Scroll (as swipe) 
+    • Long press duration 
+    • Raw touch events
+
+
+
+
+
+
+
+
+
+
+
