@@ -1,0 +1,57 @@
+[
+    {
+        "type": "tap",
+        "x": 831,
+        "y": 1595,
+        "element": {
+            "text": "Recorder",
+            "id": "com.miui.home:id/icon_title",
+            "class": "android.widget.TextView",
+            "bounds": "[795,1566][1049,1739]"
+        }
+    },
+    {
+        "type": "swipe",
+        "start": [
+            621,
+            1712
+        ],
+        "end": [
+            601,
+            2299
+        ]
+    },
+    {
+        "type": "tap",
+        "x": 651,
+        "y": 1984,
+        "element": {
+            "text": "",
+            "id": "com.miui.home:id/search_bar_container",
+            "class": "android.widget.FrameLayout",
+            "bounds": "[0,1390][1080,2307]"
+        }
+    },
+    {
+        "type": "swipe",
+        "start": [
+            769,
+            1812
+        ],
+        "end": [
+            606,
+            2303
+        ]
+    },
+    {
+        "type": "tap",
+        "x": 450,
+        "y": 1942,
+        "element": {
+            "text": "",
+            "id": "com.miui.home:id/icon_icon",
+            "class": "android.widget.ImageView",
+            "bounds": "[346,1891][480,2025]"
+        }
+    }
+]
