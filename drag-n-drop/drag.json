@@ -1,0 +1,41 @@
+[
+    {
+        "type": "drag",
+        "start": {
+            "x": 170,
+            "y": 2225
+        },
+        "end": {
+            "x": 275,
+            "y": 1289
+        },
+        "duration": 1.465,
+        "points_count": 113
+    },
+    {
+        "type": "drag",
+        "start": {
+            "x": 188,
+            "y": 1262
+        },
+        "end": {
+            "x": 192,
+            "y": 2299
+        },
+        "duration": 1.122,
+        "points_count": 80
+    },
+    {
+        "type": "drag",
+        "start": {
+            "x": 448,
+            "y": 1565
+        },
+        "end": {
+            "x": 707,
+            "y": 1173
+        },
+        "duration": 0.956,
+        "points_count": 73
+    }
+]
